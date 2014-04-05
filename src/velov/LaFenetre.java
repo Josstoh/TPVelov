@@ -9,11 +9,16 @@ import javax.swing.JOptionPane;
  */
 public class LaFenetre extends javax.swing.JFrame {
 
+<<<<<<< HEAD
     private int nouveauNumero;
     private int clicBtnCreer=1;
+=======
+    private MonModele modele;
+>>>>>>> 5b2994a3e2220baef728ccdb3371abbb416c8770
     
     public LaFenetre() {
         initComponents();
+         modele = (MonModele)tabStation.getModel();
     }
 
     /**
@@ -27,7 +32,7 @@ public class LaFenetre extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabStation = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         lbNumeroStation = new javax.swing.JLabel();
         txtNumeroStation = new javax.swing.JTextField();
@@ -58,8 +63,8 @@ public class LaFenetre extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/velov/banniere.jpg"))); // NOI18N
 
-        jTable1.setModel(new MonModele());
-        jScrollPane1.setViewportView(jTable1);
+        tabStation.setModel(new MonModele());
+        jScrollPane1.setViewportView(tabStation);
 
         lbNumeroStation.setText("Numéro de station :");
 
@@ -232,6 +237,7 @@ public class LaFenetre extends javax.swing.JFrame {
     }//GEN-LAST:event_quitterFenetre
 
     private void btSupprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSupprimerActionPerformed
+<<<<<<< HEAD
         // TODO add your handling code here:
     }//GEN-LAST:event_btSupprimerActionPerformed
 
@@ -269,6 +275,18 @@ public class LaFenetre extends javax.swing.JFrame {
         }            
     }//GEN-LAST:event_btCreerActionPerformed
 
+=======
+        if(tabStation.getSelectedRow()== -1)
+            JOptionPane.showMessageDialog(null, "Aucune ligne sélectionnée !", "ERREUR lors de la SUPPRESSION", JOptionPane.ERROR_MESSAGE);
+        else
+        {
+            modele.supprimer(tabStation.getSelectedRow());
+            modele.actualiser();
+            modele.actualiser();
+        }
+    }//GEN-LAST:event_btSupprimerActionPerformed
+
+>>>>>>> 5b2994a3e2220baef728ccdb3371abbb416c8770
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList ListeArrondissement;
     private javax.swing.JButton btCreer;
@@ -281,7 +299,6 @@ public class LaFenetre extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbLocalisation;
     private javax.swing.JLabel lbNomStation;
     private javax.swing.JLabel lbNumArrond;
@@ -289,6 +306,7 @@ public class LaFenetre extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuApropos;
     private javax.swing.JMenuItem menuFichierConnexionBase;
     private javax.swing.JMenuItem menuFichierQuitter;
+    private javax.swing.JTable tabStation;
     private javax.swing.JTextField txtLocalisation;
     private javax.swing.JTextField txtNomStation;
     private javax.swing.JTextField txtNumeroStation;

@@ -11,15 +11,7 @@ import javax.swing.UIManager;
 public class Velov {
 
     
-    public static void main(String[] args) {
-        //récupérer les étudiants
-        TreeMap<String, Station> lesStations = new TreeMap<>();
-        lesStations.put("1",new Station("1", "Iut Feyssine", 6, "Rue de la technologie"));
-        lesStations.put("2",new Station("2", "Croix luizet", 6, "Rue des bisounours"));
-        lesStations.put("3",new Station("3", "Einstein", 6, "Rue des cacahuètes"));
-        lesStations.put("4",new Station("4", "Gaston Berger", 6, "Chemin des bananes"));
-        lesStations.put("5",new Station("5", "Université Lyon 1", 6, "Avenue des Pandas"));
-        
+    public static void main(String[] args) {     
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception ex) {

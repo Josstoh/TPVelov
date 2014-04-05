@@ -29,19 +29,26 @@ public class MonModele extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int row, int col) {
-        Station s = lesStations.get(row); //on récupère l'étudiant à la position "row"
-        switch (col) {
-            case 0:
-                return s.getNumero();
-            case 1:
-                return s.getNom();
-            case 2:
-                return s.getArrondissement();
-            case 3:
-                return s.getLocalisation();
+        try {
+            Station s = lesStations.get(row);
+            switch (col) {
+                case 0:
+                    return s.getNumero();
+                case 1:
+                    return s.getNom();
+                case 2:
+                    return s.getArrondissement();
+                case 3:
+                    return s.getLocalisation();
+                default:
+                    return null;
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            return null;
         }
-        return null;
     }
+
     
     @Override
     public String getColumnName(int col){

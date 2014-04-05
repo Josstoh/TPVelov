@@ -12,10 +12,10 @@ public class MonModele extends AbstractTableModel {
 
     private String [] libelles = {"Numéro station", "Nom station", "Numéro arrondissement", "Localisation"};
     private TreeMap<String, Station> lesStations = null;
+    private ArrayList<Station> valeurs = null;
     
     public MonModele() {
         this.actualiser();
-        System.out.println("aaaaaaaaa");
     }
     
     //méthodes à définir obligatoirement
@@ -32,13 +32,9 @@ public class MonModele extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int row, int col) {
-        System.out.println("numéro ligne " + row);
-        System.out.println("taille HM " + this.lesStations.size());
-        Collection<Station> colStations = lesStations.values();
-        ArrayList<Station> alStations = new ArrayList(colStations);
         try {
             
-            Station s = alStations.get(row);
+            Station s = valeurs.get(row);
             System.out.println(s);
             switch (col) {
                 case 0:
@@ -71,15 +67,18 @@ public class MonModele extends AbstractTableModel {
         else
             lesStations = new TreeMap<>();
         DAOStation.consultation(lesStations);
-        //fireTableDataChanged();
+        this.valeurs = new ArrayList(lesStations.values());
+        fireTableDataChanged();
     }
-    public void ajouterStation(Station s){
+    public void ajouter(Station s){
         lesStations.put(s.getNumero(), s);
         fireTableDataChanged();
     }
     
     public void supprimer(int ligne){
-        lesStations.remove(ligne);
+        Station s = valeurs.remove(ligne);
+        DAOStation.supprimer(s.getNumero());
+        this.actualiser();
         fireTableDataChanged();
     }
     

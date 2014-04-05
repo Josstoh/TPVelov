@@ -58,7 +58,7 @@ public class DAOStation {
         public static void supprimer(String numero)
     {
         try {
-            PreparedStatement requete = connexionBD.prepareStatement("DELETE FROM station WHERE numero = ?");
+            PreparedStatement requete = connexionBD.prepareStatement("DELETE FROM station WHERE numeroidentification = ?");
             requete.setString(1,numero);
             requete.executeUpdate();
             requete.close();

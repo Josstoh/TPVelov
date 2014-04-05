@@ -8,10 +8,11 @@ import javax.swing.JOptionPane;
  */
 public class LaFenetre extends javax.swing.JFrame {
 
-  
+    private MonModele modele;
     
     public LaFenetre() {
         initComponents();
+         modele = (MonModele)tabStation.getModel();
     }
 
     /**
@@ -25,7 +26,7 @@ public class LaFenetre extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabStation = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         lbNumeroStation = new javax.swing.JLabel();
         txtNumeroStation = new javax.swing.JTextField();
@@ -56,8 +57,8 @@ public class LaFenetre extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/velov/banniere.jpg"))); // NOI18N
 
-        jTable1.setModel(new MonModele());
-        jScrollPane1.setViewportView(jTable1);
+        tabStation.setModel(new MonModele());
+        jScrollPane1.setViewportView(tabStation);
 
         lbNumeroStation.setText("Numéro de station :");
 
@@ -77,6 +78,11 @@ public class LaFenetre extends javax.swing.JFrame {
         btCreer.setText("Créer");
 
         btSupprimer.setText("Supprimer");
+        btSupprimer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSupprimerActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -217,6 +223,17 @@ public class LaFenetre extends javax.swing.JFrame {
         quitter();
     }//GEN-LAST:event_quitterFenetre
 
+    private void btSupprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSupprimerActionPerformed
+        if(tabStation.getSelectedRow()== -1)
+            JOptionPane.showMessageDialog(null, "Aucune ligne sélectionnée !", "ERREUR lors de la SUPPRESSION", JOptionPane.ERROR_MESSAGE);
+        else
+        {
+            modele.supprimer(tabStation.getSelectedRow());
+            modele.actualiser();
+            modele.actualiser();
+        }
+    }//GEN-LAST:event_btSupprimerActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCreer;
     private javax.swing.JButton btSupprimer;
@@ -229,7 +246,6 @@ public class LaFenetre extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbLocalisation;
     private javax.swing.JLabel lbNomStation;
     private javax.swing.JLabel lbNumArrond;
@@ -237,6 +253,7 @@ public class LaFenetre extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuApropos;
     private javax.swing.JMenuItem menuFichierConnexionBase;
     private javax.swing.JMenuItem menuFichierQuitter;
+    private javax.swing.JTable tabStation;
     private javax.swing.JTextField txtLocalisation;
     private javax.swing.JTextField txtNomStation;
     private javax.swing.JTextField txtNumeroStation;

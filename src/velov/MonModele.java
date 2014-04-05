@@ -15,7 +15,7 @@ public class MonModele extends AbstractTableModel {
     private ArrayList<Station> valeurs = null;
     
     public MonModele() {
-        this.actualiser();
+       this.actualiser();
     }
     
     //méthodes à définir obligatoirement
@@ -35,7 +35,6 @@ public class MonModele extends AbstractTableModel {
         try {
             
             Station s = valeurs.get(row);
-            System.out.println(s);
             switch (col) {
                 case 0:
                     return s.getNumero();

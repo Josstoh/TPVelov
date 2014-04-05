@@ -9,16 +9,12 @@ import javax.swing.JOptionPane;
  */
 public class LaFenetre extends javax.swing.JFrame {
 
-<<<<<<< HEAD
     private int nouveauNumero;
     private int clicBtnCreer=1;
-=======
     private MonModele modele;
->>>>>>> 5b2994a3e2220baef728ccdb3371abbb416c8770
     
     public LaFenetre() {
         initComponents();
-         modele = (MonModele)tabStation.getModel();
     }
 
     /**
@@ -63,7 +59,6 @@ public class LaFenetre extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/velov/banniere.jpg"))); // NOI18N
 
-        tabStation.setModel(new MonModele());
         jScrollPane1.setViewportView(tabStation);
 
         lbNumeroStation.setText("Numéro de station :");
@@ -220,7 +215,9 @@ public class LaFenetre extends javax.swing.JFrame {
         }
     }
     private void menuFichierConnexionBaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFichierConnexionBaseActionPerformed
-        // TODO add your handling code here:
+        tabStation.setModel(new MonModele());
+        menuFichierConnexionBase.setEnabled(false);
+        modele = (MonModele)tabStation.getModel();
     }//GEN-LAST:event_menuFichierConnexionBaseActionPerformed
 
     private void menuFichierQuitterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFichierQuitterActionPerformed
@@ -237,8 +234,13 @@ public class LaFenetre extends javax.swing.JFrame {
     }//GEN-LAST:event_quitterFenetre
 
     private void btSupprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSupprimerActionPerformed
-<<<<<<< HEAD
-        // TODO add your handling code here:
+        if(tabStation.getSelectedRow()== -1)
+            JOptionPane.showMessageDialog(null, "Aucune ligne sélectionnée !", "ERREUR lors de la SUPPRESSION", JOptionPane.ERROR_MESSAGE);
+        else
+        {
+            modele.supprimer(tabStation.getSelectedRow());
+            modele.actualiser();
+        }
     }//GEN-LAST:event_btSupprimerActionPerformed
 
     private void btCreerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCreerActionPerformed
@@ -267,7 +269,7 @@ public class LaFenetre extends javax.swing.JFrame {
                         txtLocalisation.setText(null);
                         ListeArrondissement.setSelectedIndex(0);
                         btCreer.setText("Créer");
-                        
+                        modele.actualiser();
                     }
                 }
                     clicBtnCreer=1;
@@ -275,18 +277,6 @@ public class LaFenetre extends javax.swing.JFrame {
         }            
     }//GEN-LAST:event_btCreerActionPerformed
 
-=======
-        if(tabStation.getSelectedRow()== -1)
-            JOptionPane.showMessageDialog(null, "Aucune ligne sélectionnée !", "ERREUR lors de la SUPPRESSION", JOptionPane.ERROR_MESSAGE);
-        else
-        {
-            modele.supprimer(tabStation.getSelectedRow());
-            modele.actualiser();
-            modele.actualiser();
-        }
-    }//GEN-LAST:event_btSupprimerActionPerformed
-
->>>>>>> 5b2994a3e2220baef728ccdb3371abbb416c8770
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList ListeArrondissement;
     private javax.swing.JButton btCreer;

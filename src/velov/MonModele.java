@@ -2,17 +2,20 @@ package velov;
 
 import dao.*;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collection;
+import java.util.List;
+import java.util.TreeMap;
 import metier.Station;
 import javax.swing.table.AbstractTableModel;
 
 public class MonModele extends AbstractTableModel {
 
     private String [] libelles = {"Numéro station", "Nom station", "Numéro arrondissement", "Localisation"};
-    private HashMap<String, Station> lesStations = null;
+    private TreeMap<String, Station> lesStations = null;
     
     public MonModele() {
         this.actualiser();
+        System.out.println("aaaaaaaaa");
     }
     
     //méthodes à définir obligatoirement
@@ -29,8 +32,14 @@ public class MonModele extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int row, int col) {
+        System.out.println("numéro ligne " + row);
+        System.out.println("taille HM " + this.lesStations.size());
+        Collection<Station> colStations = lesStations.values();
+        ArrayList<Station> alStations = new ArrayList(colStations);
         try {
-            Station s = lesStations.get(row);
+            
+            Station s = alStations.get(row);
+            System.out.println(s);
             switch (col) {
                 case 0:
                     return s.getNumero();
@@ -60,9 +69,9 @@ public class MonModele extends AbstractTableModel {
         if(lesStations != null)
             lesStations.clear();
         else
-            lesStations = new HashMap<>();
+            lesStations = new TreeMap<>();
         DAOStation.consultation(lesStations);
-        fireTableDataChanged();
+        //fireTableDataChanged();
     }
     public void ajouterStation(Station s){
         lesStations.put(s.getNumero(), s);

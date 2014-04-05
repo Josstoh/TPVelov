@@ -7,7 +7,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.HashMap;
+import java.util.TreeMap;
 import java.util.List;
 
 
@@ -35,7 +35,7 @@ public class DAOStation {
 }
         
         
-        public static void consultation(HashMap<String,Station> hm) {
+        public static void consultation(TreeMap<String,Station> hm) {
         try {
             Statement requete = connexionBD.createStatement();
             ResultSet resultat = requete.executeQuery

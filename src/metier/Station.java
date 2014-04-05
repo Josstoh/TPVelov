@@ -46,6 +46,11 @@ public class Station {
     public void setLocalisation(String localisation) {
         this.localisation = localisation;
     }
+
+    @Override
+    public String toString() {
+        return "Station{" + "numero=" + numero + ", nom=" + nom + ", arrondissement=" + arrondissement + ", localisation=" + localisation + '}';
+    }
     
     
 }

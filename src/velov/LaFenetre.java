@@ -1,5 +1,6 @@
 package velov;
 
+import dao.*;
 import javax.swing.JOptionPane;
 
 /**
@@ -8,7 +9,8 @@ import javax.swing.JOptionPane;
  */
 public class LaFenetre extends javax.swing.JFrame {
 
-  
+    private int nouveauNumero;
+    private int clicBtnCreer=1;
     
     public LaFenetre() {
         initComponents();
@@ -33,7 +35,7 @@ public class LaFenetre extends javax.swing.JFrame {
         txtNomStation = new javax.swing.JTextField();
         lbNumArrond = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        ListeArrondissement = new javax.swing.JList();
         lbLocalisation = new javax.swing.JLabel();
         txtLocalisation = new javax.swing.JTextField();
         btCreer = new javax.swing.JButton();
@@ -61,22 +63,34 @@ public class LaFenetre extends javax.swing.JFrame {
 
         lbNumeroStation.setText("Numéro de station :");
 
+        txtNumeroStation.setEditable(false);
+
         lbNomStation.setText("Nom station :");
 
         lbNumArrond.setText("Numéro arrondissement :");
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Lyon 1er arrondissement", "Lyon 2ème arrondissement", "Lyon 3ème arrondissement", "Lyon 4ème arrondissement", "Lyon 5ème arrondissement", "Lyon 6ème arrondissement", "Lyon 7ème arrondissement", "Lyon 8ème arrondissement", "Lyon 9ème arrondissement" };
+        ListeArrondissement.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane2.setViewportView(jList1);
+        jScrollPane2.setViewportView(ListeArrondissement);
 
         lbLocalisation.setText("Localisation :");
 
         btCreer.setText("Créer");
+        btCreer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCreerActionPerformed(evt);
+            }
+        });
 
         btSupprimer.setText("Supprimer");
+        btSupprimer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSupprimerActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -217,11 +231,49 @@ public class LaFenetre extends javax.swing.JFrame {
         quitter();
     }//GEN-LAST:event_quitterFenetre
 
+    private void btSupprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSupprimerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btSupprimerActionPerformed
+
+    private void btCreerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCreerActionPerformed
+        switch (clicBtnCreer)
+        {   
+            case 1 :
+                nouveauNumero = Integer.valueOf(DAOStation.getNumeroDerniereStation())+1;
+                txtNumeroStation.setText(String.valueOf(nouveauNumero));
+                clicBtnCreer++;
+                btCreer.setText("OK");
+                break;
+            
+            case 2 :
+                if(txtNomStation.getText().isEmpty() || txtLocalisation.getText().isEmpty() || ListeArrondissement.isSelectionEmpty())
+                {
+                    JOptionPane.showMessageDialog(this, "Veuillez remplir toutes les informations", "Attention", JOptionPane.ERROR_MESSAGE);
+                }
+                else
+                {
+                    int bool = JOptionPane.showConfirmDialog(this, "Ajouter cette station?", "Confirmation de la création", JOptionPane.YES_NO_OPTION);
+                    if(bool == 0)
+                    {
+                        DAOStation.inserer(txtNumeroStation.getText(), txtNomStation.getText(), Integer.valueOf(ListeArrondissement.getSelectedValue().toString()), txtLocalisation.getText());
+                        txtNumeroStation.setText(null);
+                        txtNomStation.setText(null);
+                        txtLocalisation.setText(null);
+                        ListeArrondissement.setSelectedIndex(0);
+                        btCreer.setText("Créer");
+                        
+                    }
+                }
+                    clicBtnCreer=1;
+                    break;
+        }            
+    }//GEN-LAST:event_btCreerActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JList ListeArrondissement;
     private javax.swing.JButton btCreer;
     private javax.swing.JButton btSupprimer;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JList jList1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;

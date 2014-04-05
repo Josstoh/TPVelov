@@ -17,10 +17,10 @@ public class DAOStation {
 	public static boolean inserer(String numero, String nom, int arrondissement, String localisation) {
         try {
             PreparedStatement requete = connexionBD.prepareStatement
-                    ("INSERT into station(numeroidentification,nomstation,numeroarrondissmentville,localisation)VALUES(?,?,?,?)");
-            requete.setString(1,numero );
+                    ("INSERT into station(numeroidentification,nomstation,numeroarrondissementville,localisation)VALUES(?,?,?,?)");
+            requete.setString(1,numero);
             requete.setString(2, nom);
-            requete.setInt(3,arrondissement );
+            requete.setInt(3,arrondissement);
             requete.setString(4, localisation);
             int inserer = requete.executeUpdate();
             requete.close();
@@ -86,7 +86,7 @@ public class DAOStation {
         }
     }
 
-    public static int getNumeroDerniereStation() {
+    public static String getNumeroDerniereStation() {
         try {
             Statement requete = connexionBD.createStatement();
             ResultSet resultat = requete.executeQuery("SELECT valeur FROM constantes WHERE nom = 'num_derniere_station'");
@@ -98,16 +98,16 @@ public class DAOStation {
             }
 
             if (valeur != null) {
-                return Integer.valueOf(valeur);
+                return valeur;
             } else {
                 System.err.println("Erreur lors de la récupération du numéro de la dernière réservation...");
             }
-            return -1;
+            return null;
 
         } catch (Exception e) {
 
             System.err.println("erreur" + e.getMessage());
-            return -1;
+            return null;
         }
     }
     
@@ -115,7 +115,7 @@ public class DAOStation {
     {
          try {
                 Statement requete = connexionBD.createStatement();
-                ResultSet resultat = requete.executeQuery("UPDATE constantes SET valeur=valeur+1  WHERE nom = 'num_derniere_reservation'"); 
+                ResultSet resultat = requete.executeQuery("UPDATE constantes SET valeur=valeur+1  WHERE nom = 'num_derniere_station'"); 
                 requete.close();
             
         } catch (Exception e) {
